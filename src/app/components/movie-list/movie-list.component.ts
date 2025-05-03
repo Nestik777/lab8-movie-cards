@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MovieCardComponent } from '../movie-card/movie-card.component'; // Шлях до компонента
+import { MovieCardComponent } from '../movie-card/movie-card.component'; 
 
 @Component({
   standalone: true,
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.scss'],
-  imports: [CommonModule, MovieCardComponent] // ІМПОРТУЄМО!
+  imports: [CommonModule, MovieCardComponent] 
 })
 export class MovieListComponent {
   @Input() movies: any[] = [];

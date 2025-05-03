@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --gradient-start: #1B0000;    // майже чорний з відтінком червоного
+    --gradient-end: #0582ff;      // темно-синій
+    --accent: #FF4136;            // насичений червоний
+    --text-light: #EEEEEE;
+  }
+  
+  body {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: var(--text-light);
+  }
+  
+  .card {
+    background: rgba(0,0,0,0.6);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+  }
+  
+  .card h2 {
+    color: var(--accent);
+  }
+  
+  .card .description {
+    color: var(--text-light);
+  }
+  

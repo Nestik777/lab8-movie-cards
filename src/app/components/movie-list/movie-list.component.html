@@ -1,7 +1,10 @@
-<input #searchBox
-       type="text"
-       placeholder="Пошук фільму..."
-       (input)="search(searchBox.value)" />
+<div class="search-container">
+  <input  #searchBox
+  type="text"
+  placeholder="Пошук фільму..."
+  (input)="search(searchBox.value)"
+  class="search-input" />
+</div>
 
 <div class="list">
   <app-movie-card
