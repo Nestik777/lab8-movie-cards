@@ -1,12 +1,20 @@
+// src/app/app.component.ts
+
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MovieListComponent } from './components/movie-list/movie-list.component';
+
+// Ось сюди:
+import { movies, Movie } from './data/movies';
 
 @Component({
-  selector: 'app-root',
   standalone: true,
-  imports: [],
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],   // або .css, залежно від тебе
+  imports: [CommonModule, MovieListComponent]
 })
 export class AppComponent {
-  title = 'lab8-movie-cards';
+  // Тепер беремо дані з файлу:
+  moviesList: Movie[] = movies;
 }

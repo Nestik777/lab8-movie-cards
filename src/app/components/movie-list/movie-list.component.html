@@ -1,0 +1,11 @@
+<input #searchBox
+       type="text"
+       placeholder="Пошук фільму..."
+       (input)="search(searchBox.value)" />
+
+<div class="list">
+  <app-movie-card
+    *ngFor="let movie of filteredMovies"
+    [movie]="movie">
+  </app-movie-card>
+</div>
