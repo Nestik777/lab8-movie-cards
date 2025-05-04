@@ -1,0 +1,46 @@
+.cinema {
+    display: grid;
+    grid-template-columns: repeat(5, 40px);
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .seat {
+    width: 40px;
+    height: 40px;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .seat:hover {
+    transform: scale(1.1);
+  }
+  
+  .seat.selected {
+    background-color: #2196f3;
+  }
+  
+  .seat.booked {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    .cinema {
+      grid-template-columns: repeat(5, 40px); 
+      gap: 8px;
+    }
+  
+    .seat {
+      width: 36px;
+      height: 36px;
+      font-size: 12px;
+    }
+  }
+  

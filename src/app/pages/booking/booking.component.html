@@ -1,2 +1,15 @@
-<h1 class="text-2xl font-bold text-center my-4">Бронювання: {{ movieId }}</h1>
-<app-cinema-hall />
+<h2 class="title">Бронювання місць для фільму  {{ movieId }}</h2>
+
+<div class="cinema">
+  <button 
+    *ngFor="let seat of seats; let i = index"
+    (click)="toggleSeat(i)"
+    [class.selected]="selectedSeats.includes(i)"
+    [class.booked]="bookedSeats.includes(i)"
+    class="seat">
+    {{ i + 1 }}
+  </button>
+</div>
+
+<p *ngIf="selectedSeats.length">Вибрані місця: {{ selectedSeatLabels }}</p>
+

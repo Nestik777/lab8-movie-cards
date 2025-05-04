@@ -11,9 +11,27 @@ import { CommonModule } from '@angular/common';
   styleUrl: './booking.component.scss'
 })
 export class BookingComponent {
-  movieId: string = '';
+  movieId: string | null = null;
+  seats: number[] = Array.from({ length: 40 }, (_, i) => i);
+  selectedSeats: number[] = [];
+  bookedSeats: number[] = []; 
 
-  constructor(private route: ActivatedRoute) {
-    this.movieId = this.route.snapshot.params['id'];
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.movieId = this.route.snapshot.paramMap.get('id');
+  }
+  get selectedSeatLabels(): string {
+    return this.selectedSeats.map(i => i + 1).join(', ');
+  }
+  
+  toggleSeat(seatIndex: number) {
+    if (this.bookedSeats.includes(seatIndex)) return;
+
+    if (this.selectedSeats.includes(seatIndex)) {
+      this.selectedSeats = this.selectedSeats.filter(i => i !== seatIndex);
+    } else {
+      this.selectedSeats.push(seatIndex);
+    }
   }
 }
