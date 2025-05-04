@@ -5,6 +5,27 @@
     --text-light: #EEEEEE;
     height: 100%;
   }
+  #toast-container.toast-top-center {
+    top: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    text-align: center;
+    width: auto !important;
+  }
+  
+  #toast-container > .ngx-toastr {
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  .toast-success {
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #4caf50 !important;
+    color: #fff !important;
+    border-radius: 8px;
+    padding: 16px;
+  }
   
   body {
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
@@ -23,5 +44,8 @@
   
   .card .description {
     color: var(--text-light);
+  }
+  .text-center{
+    text-align: center;
   }
   

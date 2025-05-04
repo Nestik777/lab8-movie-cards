@@ -5,5 +5,4 @@ import { BookingComponent } from './pages/booking/booking.component';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'booking/:id', component: BookingComponent }
-
 ];

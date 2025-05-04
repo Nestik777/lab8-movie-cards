@@ -1,11 +1,11 @@
-<div class="grid gap-2 justify-center">
+<!-- <div class="grid gap-2 justify-center">
     <div *ngFor="let row of [].constructor(rows); let rowIndex = index" class="flex justify-center gap-2">
       <div
         *ngFor="let col of [].constructor(cols); let colIndex = index"
         (click)="toggleSeat(rowIndex, colIndex)"
         [class.bg-green-500]="!isSelected(rowIndex, colIndex)"
         [class.bg-blue-500]="isSelected(rowIndex, colIndex)"
-        class="w-10 h-10 rounded cursor-pointer text-white flex items-center justify-ceтnter"
+        class="w-10 h-10 rounded cursor-pointer text-white flex items-center justify-center"
       >
         {{ rowIndex + 1 }}{{ colIndex + 1 }}
       </div>
@@ -13,4 +13,29 @@
   </div>
   
   <p class="text-center mt-4">Вибрані місця: {{ selectedSeats.join(', ') || 'Жодного' }}</p>
-  
+  <button (click)="openForm()" [disabled]="!selectedSeats.length">Забронювати</button>
+   -->
+   <h3 class="text-center">Кінозал (фільм {{ movieId }})</h3>
+
+   <div class="hall">
+     <div
+       *ngFor="let seat of seats; let i = index"
+       class="seat"
+       [class.booked]="isBooked(i)"
+       [class.selected]="isSelected(i)"
+       [class.available]="!isBooked(i) && !isSelected(i)"
+       (click)="toggleSeat(i)"
+     >
+       {{ i + 1 }}
+     </div>
+   </div>
+   
+   <button
+  class="booking-btn"
+  (click)="openForm()"
+  [disabled]="selectedSeats.length === 0"
+>
+  Забронювати ({{ selectedSeats.length }})
+</button>
+
+   

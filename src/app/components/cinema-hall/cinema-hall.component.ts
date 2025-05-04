@@ -1,28 +1,51 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { BookingService } from '../../services/booking.service';
 
 @Component({
   selector: 'app-cinema-hall',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './cinema-hall.component.html',
-  styleUrl: './cinema-hall.component.scss'
+  styleUrls: ['./cinema-hall.component.scss']
 })
-export class CinemaHallComponent {
+export class CinemaHallComponent implements OnInit {
+  @Input() movieId!: string;
+  @Output() bookingRequested = new EventEmitter<number[]>();
+
   rows = 5;
   cols = 8;
-  selectedSeats: string[] = [];
+  seats = Array(this.rows * this.cols).fill(0);
 
-  toggleSeat(row: number, col: number) {
-    const seat = `${row}-${col}`;
-    if (this.selectedSeats.includes(seat)) {
-      this.selectedSeats = this.selectedSeats.filter(s => s !== seat);
+  selectedSeats: number[] = [];
+  bookedSeats: number[] = [];
+
+  constructor(private bookingService: BookingService) {}
+
+  ngOnInit() {
+    this.bookedSeats = this.bookingService.getBookings(this.movieId);
+  }
+  refreshBookedSeats(): void {
+    this.bookedSeats = this.bookingService.getBookings(this.movieId);
+  }
+  isBooked(i: number) { return this.bookedSeats.includes(i); }
+
+  isSelected(i: number): boolean {
+    return this.selectedSeats.includes(i);
+  }
+
+  toggleSeat(i: number) {
+    if (this.isBooked(i)) return;
+    if (this.isSelected(i)) {
+      this.selectedSeats = this.selectedSeats.filter(s => s !== i);
     } else {
-      this.selectedSeats.push(seat);
+      this.selectedSeats.push(i);
     }
   }
 
-  isSelected(row: number, col: number): boolean {
-    return this.selectedSeats.includes(`${row}-${col}`);
+  openForm() {
+    this.bookingRequested.emit(this.selectedSeats);
   }
+
+  
 }

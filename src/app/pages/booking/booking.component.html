@@ -1,15 +1,60 @@
-<h2 class="title">Бронювання місць для фільму  {{ movieId }}</h2>
-
-<div class="cinema">
-  <button 
-    *ngFor="let seat of seats; let i = index"
-    (click)="toggleSeat(i)"
-    [class.selected]="selectedSeats.includes(i)"
-    [class.booked]="bookedSeats.includes(i)"
-    class="seat">
-    {{ i + 1 }}
-  </button>
+<h2 class="page-title text-center">Бронювання квитків для фільму {{ movieId }}</h2>
+<div 
+  class="success-toast" 
+  *ngIf="showSuccessMessage">
+  <strong>{{ successTitle }}</strong><br />
+  {{ successMessage }}
 </div>
+<app-cinema-hall
+  [movieId]="movieId"
+  (bookingRequested)="onBookingRequested($event)"
+></app-cinema-hall>
 
-<p *ngIf="selectedSeats.length">Вибрані місця: {{ selectedSeatLabels }}</p>
+<div 
+  class="modal-backdrop"
+  *ngIf="showForm"
+  (click)="closeForm()"
+></div>
 
+<div class="modal" *ngIf="showForm">
+  <button class="close-btn" (click)="closeForm()">✕</button>
+
+  <h3>Підтвердження бронювання</h3>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="booking-form">
+    <div *ngIf="cinemaHall.selectedSeats.length">
+      <p>Вибрані місця: <strong>{{ selectedSeatLabels }}</strong></p>
+    </div>
+
+    <label>
+      Ім’я
+      <input type="text" formControlName="name" placeholder="Ваше ім’я" />
+      <div class="error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+        Ім’я обов’язкове
+      </div>
+    </label>
+
+    <label>
+      Телефон
+      <input type="tel" formControlName="phone" placeholder="+380 XX XXX XXXX" />
+      <div class="error" *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
+        Телефон обов’язковий
+      </div>
+    </label>
+
+    <label>
+      Email
+      <input type="email" formControlName="email" placeholder="you@example.com" />
+      <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.hasError('required')">
+        Email обов’язковий
+      </div>
+      <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.hasError('email')">
+        Невірний формат email
+      </div>
+    </label>
+
+    <button type="submit" [disabled]="cinemaHall.selectedSeats.length === 0">
+      Підтвердити
+    </button>
+  </form>
+</div>
