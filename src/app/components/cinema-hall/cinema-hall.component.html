@@ -1,0 +1,16 @@
+<div class="grid gap-2 justify-center">
+    <div *ngFor="let row of [].constructor(rows); let rowIndex = index" class="flex justify-center gap-2">
+      <div
+        *ngFor="let col of [].constructor(cols); let colIndex = index"
+        (click)="toggleSeat(rowIndex, colIndex)"
+        [class.bg-green-500]="!isSelected(rowIndex, colIndex)"
+        [class.bg-blue-500]="isSelected(rowIndex, colIndex)"
+        class="w-10 h-10 rounded cursor-pointer text-white flex items-center justify-ceтnter"
+      >
+        {{ rowIndex + 1 }}{{ colIndex + 1 }}
+      </div>
+    </div>
+  </div>
+  
+  <p class="text-center mt-4">Вибрані місця: {{ selectedSeats.join(', ') || 'Жодного' }}</p>
+  
